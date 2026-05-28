@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Rania Khamilla Arsita 💕</title>
+<link rel="icon" href="img/bunga.jpg" type="image/x-icon">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Playfair Display', 'serif'],
+          script: ['Dancing Script', 'cursive'],
+          body: ['Lato', 'sans-serif'],
+        },
+        colors: {
+          blush: { 50:'#fff0f3', 100:'#ffe0e8', 200:'#ffc1d4', 300:'#ff94b0', 400:'#ff5c87', 500:'#ff2d67', 600:'#e8004a', 700:'#c4003e', 800:'#a30038', 900:'#8a0035' },
+          petal: { 50:'#fdf2f8', 100:'#fce7f3', 200:'#fbcfe8', 300:'#f9a8d4', 400:'#f472b6', 500:'#ec4899', 600:'#db2777' },
+          cream: '#fdf8f0',
+          wine:  '#7c2d3f',
+        },
+        animation: {
+          'float':    'float 3s ease-in-out infinite',
+          'pulse-soft':'pulse-soft 2s ease-in-out infinite',
+          'spin-slow': 'spin 8s linear infinite',
+          'heart-beat':'heartBeat .6s ease-in-out infinite',
+          'petal-fall':'petalFall 6s linear infinite',
+        },
+        keyframes: {
+          float:     { '0%,100%':{transform:'translateY(0)'}, '50%':{transform:'translateY(-10px)'} },
+          'pulse-soft':{ '0%,100%':{opacity:1}, '50%':{opacity:.6} },
+          heartBeat: { '0%,100%':{transform:'scale(1)'}, '50%':{transform:'scale(1.2)'} },
+          petalFall: { '0%':{transform:'translateY(-20px) rotate(0deg)',opacity:1}, '100%':{transform:'translateY(100vh) rotate(720deg)',opacity:0} },
+        }
+      }
+    }
+  }
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { background: #fdf8f0; overflow-x: hidden; }
+
+  .petal { position:fixed; width:12px; height:12px; background: linear-gradient(135deg,#ff94b0,#f9a8d4); border-radius:50% 0 50% 0; pointer-events:none; z-index:0; animation: petalFall linear infinite; }
+
+  .reveal { opacity:0; transform:translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  .memory-card { transition: transform .3s, box-shadow .3s; cursor:pointer; }
+  .memory-card:hover { transform: translateY(-8px) rotate(1deg); box-shadow: 0 20px 60px rgba(124,45,63,.2); }
+
+  #flowerCanvas { border-radius:16px; background:#0f172a; display:block; margin:0 auto; box-shadow: 0 0 40px rgba(255,94,135,.25); }
+
+  .envelope { transition: transform .4s; }
+  .envelope:hover { transform: scale(1.05) rotate(-2deg); }
+
+  .tl-dot { width:14px; height:14px; border-radius:50%; background: linear-gradient(135deg,#ff5c87,#f472b6); flex-shrink:0; margin-top:4px; box-shadow: 0 0 8px rgba(255,92,135,.5); }
+
+  .grad-text { background: linear-gradient(135deg,#ff2d67,#f472b6,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+  #modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); z-index:100; align-items:center; justify-content:center; }
+  #modal.open { display:flex; }
+
+  @keyframes sparkle { 0%,100%{transform:scale(0) rotate(0deg);opacity:0} 50%{transform:scale(1) rotate(180deg);opacity:1} }
+  .sparkle { animation: sparkle 1.5s ease infinite; }
+
+  /* Flower controls */
+  .flower-btn {
+    border-radius: 14px;
+    padding: 9px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: none;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1rem;
+  }
+  .flower-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+  .flower-btn:active { transform: scale(0.96); }
+
+  /* GIF Viewer */
+  .gif-frame { transition: opacity 0.4s ease; }
+  .gif-nav-btn {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    border: 2px solid #f9a8d4;
+    border-radius: 50%;
+    width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(255,92,135,.2);
+  }
+  .gif-nav-btn:hover { background: #f9a8d4; transform: scale(1.1); color: white; }
+
+  /* Letter textarea */
+  #letterContent {
+    white-space: pre-wrap;
+    min-height: 80px;
+    line-height: 1.8;
+  }
+
+  /* Slider accent */
+  input[type=range] { accent-color: #f472b6; }
+  select { font-family: 'Lato', sans-serif; }
+</style>
+</head>
+<body class="font-body">
+
+<div id="petals"></div>
+
+<!-- ========== HERO ========== -->
+<section id="hero" class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+  <div class="absolute top-0 left-0 w-96 h-96 bg-petal-100 rounded-full blur-3xl opacity-60 -translate-x-1/2 -translate-y-1/2"></div>
+  <div class="absolute bottom-0 right-0 w-80 h-80 bg-blush-100 rounded-full blur-3xl opacity-60 translate-x-1/4 translate-y-1/4"></div>
+  <div class="absolute top-1/3 right-1/4 w-40 h-40 bg-purple-100 rounded-full blur-2xl opacity-40"></div>
+
+  <div class="relative z-10 max-w-2xl">
+    <div class="flex justify-center gap-3 mb-6">
+      <span class="text-3xl animate-heart-beat" style="animation-delay:.1s">💕</span>
+      <span class="text-3xl animate-heart-beat" style="animation-delay:.3s">🌸</span>
+      <span class="text-3xl animate-heart-beat" style="animation-delay:.5s">💕</span>
+    </div>
+
+    <p class="font-script text-petal-400 text-xl mb-2">sebuah kejutan kecil untuk</p>
+    <h1 id="heroName" class="font-display text-5xl md:text-7xl font-bold grad-text mb-4">Rania Khamilla Arsita</h1>
+    <p class="font-display text-wine italic text-lg mb-8">dari seseorang yang sangat menyayangimu (Isal)</p>
+
+    <div class="flex flex-wrap justify-center gap-4 mb-10">
+      <div class="bg-white/80 backdrop-blur rounded-2xl px-5 py-3 shadow-md border border-petal-100">
+        <div id="days" class="font-display text-3xl font-bold grad-text">365</div>
+        <div class="text-xs text-gray-400 font-body">hari bersama</div>
+      </div>
+      <div class="bg-white/80 backdrop-blur rounded-2xl px-5 py-3 shadow-md border border-petal-100">
+        <div class="font-display text-3xl font-bold grad-text">∞</div>
+        <div class="text-xs text-gray-400 font-body">rasa sayang aku ke kamu</div>
+      </div>
+    </div>
+
+    <button onclick="document.getElementById('flower-section').scrollIntoView({behavior:'smooth'})"
+      class="bg-gradient-to-r from-blush-400 to-petal-500 text-white font-script text-xl px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+      Gambar Bunga 💐
+    </button>
+  </div>
+
+  <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-50">
+    <span class="text-xs text-gray-400">scroll ke bawah</span>
+    <div class="w-0.5 h-8 bg-petal-300 rounded animate-pulse"></div>
+  </div>
+</section>
+
+<!-- ========== FLOWER GARDEN (Algorithm from Code 2) ========== -->
+<section id="flower-section" class="reveal py-20 px-6 bg-gradient-to-b from-cream to-petal-50">
+  <h2 class="font-display text-4xl font-bold grad-text mb-3 text-center">Kebun Bunga</h2>
+  <p class="text-gray-400 text-sm mb-8 text-center">Setiap kelopak bunga dilukis oleh ketulusan rasa — sebuah keindahan yang terus tumbuh dan mekar tanpa akhir.</p>
+ 
+  <div class="max-w-4xl mx-auto">
+ 
+    <!-- Bunga Otomatis -->
+    <div class="mb-4">
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-2 font-body">Gambar Bunga Otomatis</p>
+      <div class="flex flex-wrap gap-3">
+        <button onclick="drawDaisy()" class="flower-btn bg-gradient-to-r from-pink-500 to-rose-500 text-white">🌼 Daisy</button>
+        <button onclick="drawSunflower()" class="flower-btn bg-gradient-to-r from-yellow-400 to-orange-400 text-white">🌻 Bunga Matahari</button>
+        <button onclick="drawSpiral()" class="flower-btn bg-gradient-to-r from-purple-500 to-indigo-500 text-white">🌀 Spiral Bunga</button>
+        <button onclick="drawLotus()" class="flower-btn bg-gradient-to-r from-petal-400 to-petal-500 text-white">🌸 Lotus</button>
+        <button onclick="drawMandala()" class="flower-btn bg-gradient-to-r from-blue-400 to-violet-500 text-white">✨ Mandala</button>
+        <button onclick="drawLily()" class="flower-btn bg-gradient-to-r from-pink-400 to-rose-400 text-white">💮 Lily</button>
+        <button onclick="drawRose()" class="flower-btn bg-gradient-to-r from-pink-500 to-rose-500 text-white">🌹 Rose</button>
+        <button onclick="drawTulip()" class="flower-btn bg-gradient-to-r from-pink-500 to-rose-500 text-white">🌷 Tulip</button>
+      </div>
+    </div>
+ 
+    <!-- Sliders Bunga -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+      <div class="bg-white/70 backdrop-blur rounded-2xl p-3 border border-petal-100">
+        <label class="text-gray-400 text-xs font-body block mb-1">Kelopak: <span id="petalVal" class="text-petal-500 font-bold">12</span></label>
+        <input type="range" min="4" max="36" value="12" id="petalSlider" oninput="document.getElementById('petalVal').textContent=this.value" class="w-full">
+      </div>
+      <div class="bg-white/70 backdrop-blur rounded-2xl p-3 border border-petal-100">
+        <label class="text-gray-400 text-xs font-body block mb-1">Ukuran: <span id="sizeVal" class="text-petal-500 font-bold">100</span></label>
+        <input type="range" min="40" max="160" value="100" id="sizeSlider" oninput="document.getElementById('sizeVal').textContent=this.value" class="w-full">
+      </div>
+      <div class="bg-white/70 backdrop-blur rounded-2xl p-3 border border-petal-100">
+        <label class="text-gray-400 text-xs font-body block mb-1">Kecepatan: <span id="speedVal" class="text-petal-500 font-bold">2</span></label>
+        <input type="range" min="1" max="10" value="2" id="speedSlider" oninput="document.getElementById('speedVal').textContent=this.value" class="w-full">
+      </div>
+      <div class="bg-white/70 backdrop-blur rounded-2xl p-3 border border-petal-100">
+        <label class="text-gray-400 text-xs font-body block mb-1">Tema Warna Bunga:</label>
+        <select id="colorMode" class="w-full text-xs rounded-lg border border-petal-100 p-1 text-gray-600 bg-white">
+          <option value="warm">🌹 Romantis</option>
+          <option value="rainbow">🌈 Pelangi</option>
+          <option value="cool">💙 Dingin</option>
+          <option value="mono">💜 Mono</option>
+        </select>
+      </div>
+    </div>
+ 
+    <!-- Gambar Sendiri -->
+    <div class="bg-white/70 backdrop-blur rounded-2xl p-4 border border-petal-100 mb-4">
+      <p class="text-xs text-gray-400 uppercase tracking-widest mb-3 font-body">✏️ Gambar Sendiri di Canvas</p>
+      <div class="flex flex-wrap gap-2 items-center mb-3">
+ 
+        <!-- Toggle Draw Mode -->
+        <button id="drawModeBtn" onclick="toggleDrawMode()"
+          class="flower-btn border-2 border-petal-300 text-petal-500 bg-white">
+          ✏️ Mode Gambar
+        </button>
+ 
+        <div class="w-px h-7 bg-petal-100 mx-1"></div>
+ 
+        <!-- Pilih tema warna kuas -->
+        <div class="bg-petal-50 rounded-xl px-3 py-1.5 border border-petal-100 flex items-center gap-2">
+          <span class="text-xs text-gray-400">Warna Kuas</span>
+          <select id="brushColorMode" onchange="syncBrushColorPicker()"
+            class="text-xs rounded-lg border border-petal-100 p-1 text-gray-600 bg-white">
+            <option value="warm">🌹 Romantis</option>
+            <option value="rainbow">🌈 Pelangi</option>
+            <option value="cool">💙 Dingin</option>
+            <option value="mono">💜 Mono</option>
+            <option value="custom">🎨 Pilih Sendiri</option>
+          </select>
+        </div>
+ 
+        <!-- Color picker — hanya muncul jika mode custom -->
+        <div id="brushColorPickerWrap" class="bg-petal-50 rounded-xl px-3 py-1.5 border border-petal-100 items-center gap-2" style="display:none;">
+          <span class="text-xs text-gray-400">Warna</span>
+          <input type="color" id="brushColor" value="#ff94b0"
+            class="w-7 h-6 rounded cursor-pointer border-0 p-0 bg-transparent">
+        </div>
+ 
+        <!-- Ukuran kuas -->
+        <div class="bg-petal-50 rounded-xl px-3 py-1.5 border border-petal-100 flex items-center gap-2">
+          <span class="text-xs text-gray-400">Kuas</span>
+          <input type="range" min="1" max="40" value="6" id="brushSize"
+            oninput="document.getElementById('brushSizeVal').textContent=this.value"
+            class="w-20" style="accent-color:#f472b6;">
+          <span id="brushSizeVal" class="text-xs text-petal-500 font-bold w-4">6</span>
+        </div>
+ 
+        <!-- Opacity -->
+        <div class="bg-petal-50 rounded-xl px-3 py-1.5 border border-petal-100 flex items-center gap-2">
+          <span class="text-xs text-gray-400">Opacity</span>
+          <input type="range" min="10" max="100" value="90" id="brushOpacity"
+            oninput="document.getElementById('brushOpVal').textContent=this.value+'%'"
+            class="w-20" style="accent-color:#f472b6;">
+          <span id="brushOpVal" class="text-xs text-petal-500 font-bold w-8">90%</span>
+        </div>
+ 
+        <div class="w-px h-7 bg-petal-100 mx-1"></div>
+ 
+        <!-- Penghapus -->
+        <button id="eraserBtn" onclick="toggleEraser()"
+          class="flower-btn border border-petal-200 text-gray-500 bg-white">
+          🧽 Hapus
+        </button>
+ 
+        <!-- Undo -->
+        <button onclick="undoLast()"
+          class="flower-btn border border-petal-200 text-gray-500 bg-white">
+          ↩ Undo
+        </button>
+ 
+        <!-- Teks -->
+        <button onclick="addTextMode()"
+          class="flower-btn border border-petal-200 text-gray-500 bg-white">
+          T Teks
+        </button>
+      </div>
+ 
+      <!-- Baris input teks -->
+      <div id="textInputRow" class="hidden flex flex-wrap gap-2 items-center mt-2">
+        <input id="textInput" type="text" placeholder="Ketik nama atau pesan, lalu klik di canvas..."
+          class="flex-1 text-sm rounded-xl border border-petal-200 px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:border-petal-400">
+        <div class="bg-petal-50 rounded-xl px-3 py-1.5 border border-petal-100 flex items-center gap-2">
+          <span class="text-xs text-gray-400">Font</span>
+          <input type="range" min="10" max="80" value="24" id="fontSize"
+            oninput="document.getElementById('fontSizeVal').textContent=this.value"
+            class="w-16" style="accent-color:#f472b6;">
+          <span id="fontSizeVal" class="text-xs text-petal-500 font-bold w-4">24</span>
+        </div>
+        <button onclick="confirmTextMode()"
+          class="flower-btn bg-gradient-to-r from-petal-400 to-petal-500 text-white">✓ Oke</button>
+        <button onclick="cancelTextMode()"
+          class="flower-btn border border-petal-200 text-gray-500 bg-white">✕ Batal</button>
+      </div>
+    </div>
+ 
+    <!-- Canvas -->
+    <canvas id="flowerCanvas" width="620" height="480" style="max-width:100%;"></canvas>
+ 
+    <!-- Status & tombol bawah -->
+    <div class="flex items-center justify-between mt-4 flex-wrap gap-3">
+      <div id="flowerStatus" class="font-script text-xl text-petal-400">
+        🌱 Pilih jenis bunga atau aktifkan mode gambar...
+      </div>
+      <div class="flex gap-2">
+        <button onclick="clearFlowerCanvas()"
+          class="bg-white border-2 border-petal-200 text-petal-500 rounded-full px-5 py-2 font-script text-lg hover:bg-petal-50 transition">
+          🗑️ Bersihkan
+        </button>
+        <button onclick="downloadFlower()"
+          class="bg-white border-2 border-petal-200 text-petal-500 rounded-full px-5 py-2 font-script text-lg hover:bg-petal-50 transition">
+          💾 Simpan Gambar
+        </button>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+
+<!-- ========== MEMORY GALLERY ========== -->
+<section id="gallery" class="reveal py-20 px-6 bg-petal-50">
+  <p class="font-script text-petal-400 text-xl mb-2 text-center">foto tak terlupakan</p>
+  <h2 class="font-display text-4xl font-bold grad-text mb-10 text-center">Galeri Indah</h2>
+
+  <div id="memoryGrid" class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+  </div>
+</section>
+
+<!-- ========== PESAN DARI HATI ========== -->
+<section id="letter" class="reveal py-20 px-6 text-center">
+  <p class="font-script text-petal-400 text-xl mb-2">kata-kata dari hati</p>
+  <h2 class="font-display text-4xl font-bold grad-text mb-10">Surat Untukmu</h2>
+
+  <div class="max-w-xl mx-auto">
+    <!-- Envelope display — langsung tampil -->
+    <div id="envelopeWrapper" class="">
+      <div class="envelope bg-gradient-to-br from-blush-50 to-petal-50 rounded-3xl shadow-2xl border border-petal-200 p-8 text-left cursor-pointer" onclick="openEnvelope()">
+        <div id="envelopeClosed" class="text-center py-6">
+          <div class="text-6xl mb-3">💌</div>
+          <p class="font-script text-petal-400 text-xl">Klik untuk membuka surat...</p>
+        </div>
+        <div id="envelopeOpen" class="hidden">
+          <div class="flex justify-between items-start mb-4">
+            <p class="font-script text-petal-600 text-sm">Kepada yang tercinta,</p>
+            <div class="flex gap-1">
+              <span class="sparkle text-yellow-400">✦</span>
+              <span class="sparkle text-pink-400" style="animation-delay:.5s">✦</span>
+            </div>
+          </div>
+          <div id="letterContent" class="font-display text-gray-700 text-base leading-relaxed min-h-24"></div>
+          <div class="mt-6 text-right">
+            <p id="senderName" class="font-script text-petal-600 text-sm">— Seseorang yang menyayangimu</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== REASONS I LOVE YOU ========== -->
+<section id="reasons" class="reveal py-20 px-6 bg-gradient-to-b from-cream to-white text-center">
+  <p class="font-script text-petal-400 text-xl mb-2">kenapa aku mencintaimu</p>
+  <h2 class="font-display text-4xl font-bold grad-text mb-10">Alasan Aku Sayang Kamu </h2>
+
+  <div id="reasonCards" class="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+  </div>
+</section>
+
+<!-- ========== GIF VIEWER (pengganti musik) ========== -->
+<section class="reveal py-12 px-6 text-center">
+  <h2 class="font-display text-3xl font-bold grad-text mb-8">Special Card</h2>
+
+  <div class="max-w-sm mx-auto">
+    <div class="bg-gradient-to-br from-blush-50 to-petal-50 rounded-3xl shadow-xl border border-petal-100 overflow-hidden">
+      <!-- GIF Display -->
+      <div class="relative">
+        <img id="gifDisplay" src="" alt="Momen kita"
+          class="w-full object-cover gif-frame"
+          style="min-height:260px; background:#fce7f3;"
+          onerror="this.style.display='none'; document.getElementById('gifPlaceholder').style.display='flex'">
+        <!-- Placeholder jika GIF tidak ada -->
+        <div id="gifPlaceholder" class="w-full flex flex-col items-center justify-center bg-gradient-to-br from-petal-50 to-blush-50" style="min-height:260px; display:none;">
+          <div class="text-6xl mb-2 animate-float">🖼️</div>
+          <p class="font-script text-petal-300 text-lg">Tambahkan URL GIF di sini</p>
+        </div>
+
+        <!-- Caption overlay -->
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/40 to-transparent py-3 px-4">
+          <p id="gifCaption" class="font-script text-white text-base drop-shadow"></p>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="p-5">
+        <!-- Dots indicator -->
+        <div class="flex justify-center gap-2 mb-4" id="gifDots"></div>
+
+        <!-- Nav buttons -->
+        <div class="flex items-center justify-center gap-6">
+          <button onclick="prevGif()" class="gif-nav-btn"><</button>
+          <div class="text-center">
+            <p class="font-script text-petal-400 text-lg" id="gifTitle">Momen Indah</p>
+            <p class="text-xs text-gray-400 font-body" id="gifSubtitle">kenangan bersama</p>
+          </div>
+          <button onclick="nextGif()" class="gif-nav-btn">></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FINAL MESSAGE ========== -->
+<section class="reveal py-24 px-6 text-center bg-gradient-to-b from-white to-petal-50">
+  <div class="max-w-xl mx-auto">
+    <div class="text-6xl mb-6 animate-heart-beat">❤️</div>
+    <h2 class="font-display text-4xl font-bold grad-text mb-4">Untuk Selamanya</h2>
+    <p class="font-display italic text-gray-500 text-lg mb-8">"Kamu bukan hanya bagian dari hidupku,<br>kamu adalah alasan aku tersenyum setiap hari."</p>
+    <div class="flex justify-center gap-3 text-3xl animate-float">
+      <span>🌸</span><span>💕</span><span>🌸</span>
+    </div>
+  </div>
+</section>
+<footer>
+    <p class="text-center font-display mb-4 text-petal-400">Made by Calz with ❤️ for Noya</p>
+</footer>
+
+<script>
+// ==================== PETALS ====================
+function createPetals() {
+  const container = document.getElementById('petals');
+  for (let i = 0; i < 15; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (4 + Math.random() * 6) + 's';
+    p.style.animationDelay = (Math.random() * 8) + 's';
+    p.style.opacity = Math.random() * 0.5 + 0.3;
+    p.style.width = p.style.height = (8 + Math.random() * 10) + 'px';
+    container.appendChild(p);
+  }
+}
+createPetals();
+ 
+// ==================== COUNTER ====================
+function calcDays() {
+  const start = new Date('2026-04-10');
+  const now = new Date();
+  const diff = Math.floor((now - start) / (1000*60*60*24));
+  document.getElementById('days').textContent = diff > 0 ? diff : 365;
+}
+calcDays();
+ 
+// ==================== SCROLL REVEAL ====================
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+ 
+// ==================== GALLERY ====================
+const galleryItems = [
+  { image: 'img/image-1.jpeg', label: 'Foto Kita' },
+  { image: 'img/image-2.jpeg', label: 'Sunset Bersama' },
+  { image: 'img/image-3.jpeg', label: 'Ulang Tahunmu' },
+  { image: 'img/image-4.jpeg', label: 'Pantai Pertama' },
+  { image: 'img/image-5.jpeg', label: 'Makan Malam' },
+  { image: 'img/image-6.jpeg', label: 'Tahun Baru' },
+  { image: 'img/image-7.jpeg', label: 'Momen Indah' },
+  { image: 'img/image-8.jpeg', label: 'Kenangan' },
+];
+ 
+function renderGallery() {
+  const g = document.getElementById('memoryGrid');
+  g.innerHTML = galleryItems.map((item, i) => `
+    <div class="memory-card relative aspect-square rounded-2xl overflow-hidden shadow border border-white/80 animate-float" style="animation-delay:${i * 0.2}s">
+      <img src="${item.image}" alt="${item.label}" class="w-full h-full object-cover" />
+    </div>
+  `).join('');
+}
+renderGallery();
+ 
+// ==================== SURAT ====================
+const suratIsi = `Hai noyaa, kamu yang selalu ada di pikiranku...
+ 
+Menulis ini membuat aku sadar betapa beruntungnya aku memiliki kamu. Ada banyak hal indah di dunia ini, tapi tidak ada yang seindah kehadiranmu di hidupku.
+ 
+Terima kasih sudah menjadi bagian dari hariku, menjadi pendengar yang sabar, dan menjadi alasan di balik senyumku yang paling tulus. Bersamamu, aku merasa utuh. 
+ 
+Aku sayang kamu, kemarin, hari ini, esok, dan di setiap lembar waktu yang akan kita lewati bersama. 💕`;
+ 
+const namaPengirim = '— Seseorang yang sangat menyayangimu (Isal)';
+ 
+function openEnvelope() {
+  document.getElementById('envelopeClosed').classList.add('hidden');
+  const openEl = document.getElementById('envelopeOpen');
+  openEl.classList.remove('hidden');
+  document.getElementById('letterContent').textContent = suratIsi;
+  document.getElementById('senderName').textContent = namaPengirim;
+}
+ 
+// ==================== REASONS ====================
+const reasons = [
+  'Senyum kamu yang selalu sukses jadi penawar stres paling instan di dunia 😊',
+  'Tawa random kamu yang nular banget, meskipun yang kita bahas kadang nggak jelas 😂',
+  'Kamu yang selalu siap sedia dengerin keluh kesah aku, dari yang penting sampai yang random banget 🤗',
+  'Perhatian perhatian kecil kamu yang bikin aku ngerasa jadi cowo paling beruntung 😎',
+  'Ekspresi wajah kamu pas lagi happy itu lucu banget dan selalu bikin aku gagal fokus 😋',
+  'Kehadiran kamu di hidup aku yang ngebuat aku selalu punya alasan untuk bangkit lagi, seberat apa pun hari yang harus aku lewati 💪',
+];
+ 
+function renderReasons() {
+  const colors = ['from-blush-50 to-petal-50','from-purple-50 to-pink-50','from-yellow-50 to-orange-50','from-green-50 to-teal-50','from-blue-50 to-cyan-50','from-rose-50 to-red-50'];
+  const hearts = ['💕','💖','💗','💓','💞','❤️'];
+  document.getElementById('reasonCards').innerHTML = reasons.map((r,i)=>`
+    <div class="bg-gradient-to-br ${colors[i%colors.length]} rounded-2xl p-5 border border-white shadow text-left hover:scale-105 transition cursor-default">
+      <span class="text-2xl mb-2 block">${hearts[i%hearts.length]}</span>
+      <p class="font-body text-gray-600 text-sm leading-relaxed">${r}</p>
+    </div>
+  `).join('');
+}
+renderReasons();
+ 
+// ==================== GIF VIEWER ====================
+const gifs = [
+  { url: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNG44a2V3Z3U3cHhzajhvNHM0eHZjZzFhYXNvZXp1bDRudnZoZWVuNyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/f0lS4lOcrGGaAVpxT8/giphy.gif', title: 'For u My Bebe', subtitle: 'Just for you, my love' },
+  { url: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcWVicmZiZWx0eTc3eGdzNW55c3hxZjgzbnBiMjJ4bjB1cDkydGNoZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/70v43qJWwqH4I/giphy.gif', title: 'Melody Yeayyyy', subtitle: 'Aku nambahin ini karna kamu suka banget sama melody 😋' },
+  { url: 'https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NjhsbGgwYXlmZmx1bXkybDhneXYyajVneXEyNTlmZHBocjRmdmZvOCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/AGPAKeZ49Q3taCBYkN/giphy.gif', title: 'Momen ketika aku liat foto kamu', subtitle: 'Reflek Bilang "Aduhhh Cantiknyaaa My MBG Gwehj 😍"' },
+  { url: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDQ1YXh2ZGZ3eWdubThodGI5Y2ZhaXBvYmNmOW04N3U2Z3BidW5zcSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/0T1tm4a0mrDXXJBO4g/giphy.gif', title: 'Aku ketika kamu lagi marah sama aku terus ngediemin aku', subtitle: 'Sedih banget cik 😭🥺' },
+  { url: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZGFlaG43bWthMXE4c29pbzUwMnYzdndoMGc1bzlhaGJoMWp4ZW1wayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/WjHDS6qPeVJnSZITfN/giphy.gif', title: 'Aku sayang kamu', subtitle: 'I LOVE U SOO SOOO MUCHHHH 🥹💕' },
+];
+ 
+let currentGif = 0;
+ 
+function renderGifDots() {
+  const dots = document.getElementById('gifDots');
+  dots.innerHTML = gifs.map((_, i) => `
+    <button onclick="goToGif(${i})" class="w-2 h-2 rounded-full transition-all duration-300 ${i === currentGif ? 'bg-petal-400 w-4' : 'bg-petal-200'}"></button>
+  `).join('');
+}
+ 
+function updateGif() {
+  const g = gifs[currentGif];
+  const img = document.getElementById('gifDisplay');
+  const placeholder = document.getElementById('gifPlaceholder');
+  img.style.opacity = '0';
+  setTimeout(() => {
+    img.src = g.url;
+    img.style.display = 'block';
+    placeholder.style.display = 'none';
+    img.onload = () => { img.style.opacity = '1'; };
+    img.onerror = () => { img.style.display = 'none'; placeholder.style.display = 'flex'; };
+    img.style.opacity = '1';
+  }, 200);
+  document.getElementById('gifTitle').textContent = g.title;
+  document.getElementById('gifSubtitle').textContent = g.subtitle;
+  document.getElementById('gifCaption').textContent = g.caption || '';
+  renderGifDots();
+}
+ 
+function nextGif() { currentGif = (currentGif + 1) % gifs.length; updateGif(); }
+function prevGif() { currentGif = (currentGif - 1 + gifs.length) % gifs.length; updateGif(); }
+function goToGif(idx) { currentGif = idx; updateGif(); }
+updateGif();
+ 
+// ============================
+// FLOWER CANVAS
+// ============================
+const flowerCanvas = document.getElementById('flowerCanvas');
+const ctx = flowerCanvas.getContext('2d');
+ 
+// --- State gambar sendiri ---
+let animFrame = null;
+let drawMode = false;
+let eraserMode = false;
+let isDrawing = false;
+let textMode = false;
+let lastX = 0, lastY = 0;
+let drawHistory = [];
+// Counter langkah untuk efek warna tema pada kuas
+let brushStep = 0;
+ 
+function saveSnapshot() {
+  drawHistory.push(ctx.getImageData(0, 0, flowerCanvas.width, flowerCanvas.height));
+  if (drawHistory.length > 50) drawHistory.shift();
+}
+ 
+function undoLast() {
+  if (drawHistory.length > 0) ctx.putImageData(drawHistory.pop(), 0, 0);
+}
+ 
+function clearFlowerCanvas() {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  drawHistory = [];
+  brushStep = 0;
+  ctx.clearRect(0, 0, flowerCanvas.width, flowerCanvas.height);
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, flowerCanvas.width, flowerCanvas.height);
+  document.getElementById('flowerStatus').textContent = '🌱 Pilih jenis bunga atau aktifkan mode gambar...';
+}
+clearFlowerCanvas();
+ 
+// ============================
+// HELPER WARNA — dipakai bunga otomatis & kuas
+// ============================
+function getRainbowColor(step, total, mode) {
+  const t = (total > 0) ? (step % total) / total : 0;
+  const modes = {
+    rainbow: `hsl(${t * 360}, 90%, 60%)`,
+    warm:    `hsl(${t * 60 + 330}, 85%, 60%)`,
+    cool:    `hsl(${180 + t * 80}, 80%, 60%)`,
+    mono:    `hsl(310, 60%, ${40 + t * 30}%)`
+  };
+  return modes[mode] || modes.warm;
+}
+ 
+// Ambil warna kuas: jika brushColorMode bukan 'custom', pakai tema; jika 'custom', pakai color picker
+function getBrushColor() {
+  const brushColorMode = document.getElementById('brushColorMode').value;
+  if (brushColorMode === 'custom') {
+    return document.getElementById('brushColor').value;
+  }
+  // Pakai tema — step bertambah setiap segmen goresan untuk efek gradual
+  brushStep++;
+  return getRainbowColor(brushStep, 360, brushColorMode);
+}
+ 
+// Sinkronkan tampilan color picker: tampilkan hanya jika mode custom
+function syncBrushColorPicker() {
+  const brushColorMode = document.getElementById('brushColorMode').value;
+  const pickerWrap = document.getElementById('brushColorPickerWrap');
+  pickerWrap.style.display = brushColorMode === 'custom' ? 'flex' : 'none';
+}
+ 
+// --- Toggle mode gambar ---
+function toggleDrawMode() {
+  drawMode = !drawMode;
+  eraserMode = false;
+  const btn = document.getElementById('drawModeBtn');
+  const eraserBtn = document.getElementById('eraserBtn');
+  if (drawMode) {
+    btn.classList.remove('border-petal-300', 'text-petal-500', 'bg-white');
+    btn.classList.add('bg-gradient-to-r', 'from-petal-400', 'to-petal-500', 'text-white');
+    flowerCanvas.style.cursor = 'crosshair';
+    document.getElementById('flowerStatus').textContent = '✏️ Mode gambar aktif — klik dan seret untuk melukis!';
+  } else {
+    btn.classList.add('border-petal-300', 'text-petal-500', 'bg-white');
+    btn.classList.remove('bg-gradient-to-r', 'from-petal-400', 'to-petal-500', 'text-white');
+    eraserBtn.classList.add('text-gray-500', 'bg-white');
+    eraserBtn.classList.remove('bg-gradient-to-r', 'from-gray-400', 'to-gray-500', 'text-white');
+    flowerCanvas.style.cursor = 'default';
+    document.getElementById('flowerStatus').textContent = '🌱 Mode gambar nonaktif';
+    cancelTextMode();
+  }
+}
+ 
+function toggleEraser() {
+  if (!drawMode) toggleDrawMode();
+  eraserMode = !eraserMode;
+  const eraserBtn = document.getElementById('eraserBtn');
+  if (eraserMode) {
+    eraserBtn.classList.remove('text-gray-500', 'bg-white');
+    eraserBtn.classList.add('bg-gradient-to-r', 'from-gray-400', 'to-gray-500', 'text-white');
+    flowerCanvas.style.cursor = 'cell';
+    document.getElementById('flowerStatus').textContent = '🧽 Mode penghapus aktif — seret untuk menghapus';
+  } else {
+    eraserBtn.classList.add('text-gray-500', 'bg-white');
+    eraserBtn.classList.remove('bg-gradient-to-r', 'from-gray-400', 'to-gray-500', 'text-white');
+    flowerCanvas.style.cursor = 'crosshair';
+    document.getElementById('flowerStatus').textContent = '✏️ Mode gambar aktif';
+  }
+}
+ 
+function addTextMode() {
+  if (!drawMode) toggleDrawMode();
+  textMode = true;
+  document.getElementById('textInputRow').classList.remove('hidden');
+  document.getElementById('flowerStatus').textContent = 'T Ketik teks lalu klik posisi di canvas...';
+}
+ 
+function confirmTextMode() {
+  document.getElementById('textInputRow').classList.add('hidden');
+  document.getElementById('flowerStatus').textContent = 'T Klik di canvas untuk meletakkan teks...';
+}
+ 
+function cancelTextMode() {
+  textMode = false;
+  document.getElementById('textInputRow').classList.add('hidden');
+}
+ 
+// --- Event gambar ---
+function getPos(e) {
+  const rect = flowerCanvas.getBoundingClientRect();
+  const scaleX = flowerCanvas.width / rect.width;
+  const scaleY = flowerCanvas.height / rect.height;
+  const src = e.touches ? e.touches[0] : e;
+  return {
+    x: (src.clientX - rect.left) * scaleX,
+    y: (src.clientY - rect.top) * scaleY
+  };
+}
+ 
+flowerCanvas.addEventListener('mousedown', startDraw);
+flowerCanvas.addEventListener('mousemove', drawFree);
+flowerCanvas.addEventListener('mouseup', stopDraw);
+flowerCanvas.addEventListener('mouseleave', stopDraw);
+flowerCanvas.addEventListener('touchstart', e => { e.preventDefault(); startDraw(e); }, { passive: false });
+flowerCanvas.addEventListener('touchmove', e => { e.preventDefault(); drawFree(e); }, { passive: false });
+flowerCanvas.addEventListener('touchend', stopDraw);
+ 
+function startDraw(e) {
+  if (!drawMode) return;
+  const pos = getPos(e);
+ 
+  if (textMode) {
+    const text = document.getElementById('textInput').value.trim();
+    if (!text) return;
+    saveSnapshot();
+    const fsize = parseInt(document.getElementById('fontSize').value);
+    // Warna teks juga ikut tema kuas
+    const color = getBrushColor();
+    const op = parseInt(document.getElementById('brushOpacity').value) / 100;
+    ctx.save();
+    ctx.globalAlpha = op;
+    ctx.fillStyle = color;
+    ctx.font = `500 ${fsize}px 'Dancing Script', cursive`;
+    ctx.fillText(text, pos.x, pos.y);
+    ctx.restore();
+    document.getElementById('flowerStatus').textContent = `T Teks "${text}" ditambahkan! Klik lagi untuk posisi lain.`;
+    return;
+  }
+ 
+  saveSnapshot();
+  isDrawing = true;
+  lastX = pos.x;
+  lastY = pos.y;
+}
+ 
+function drawFree(e) {
+  if (!drawMode || !isDrawing || textMode) return;
+  const pos = getPos(e);
+  const size = parseInt(document.getElementById('brushSize').value);
+  const op = parseInt(document.getElementById('brushOpacity').value) / 100;
+ 
+  ctx.save();
+  ctx.globalAlpha = op;
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+ 
+  if (eraserMode) {
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.lineWidth = size * 3;
+    ctx.strokeStyle = 'rgba(0,0,0,1)';
+  } else {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.lineWidth = size;
+    ctx.strokeStyle = getBrushColor();
+  }
+ 
+  ctx.beginPath();
+  ctx.moveTo(lastX, lastY);
+  ctx.lineTo(pos.x, pos.y);
+  ctx.stroke();
+  ctx.restore();
+ 
+  lastX = pos.x;
+  lastY = pos.y;
+}
+ 
+function stopDraw() {
+  isDrawing = false;
+}
+ 
+// ============================
+// TURTLE DRAW — engine animasi bunga
+// ============================
+function turtleDraw(commands, onDone) {
+  if (animFrame) cancelAnimationFrame(animFrame);
+  saveSnapshot();
+  let i = 0;
+  const speed = parseInt(document.getElementById('speedSlider').value);
+  const batchSize = speed * 3;
+ 
+  function step() {
+    const end = Math.min(i + batchSize, commands.length);
+    for (; i < end; i++) {
+      const cmd = commands[i];
+      if (cmd.type === 'line') {
+        ctx.beginPath();
+        ctx.moveTo(cmd.x1, cmd.y1);
+        ctx.lineTo(cmd.x2, cmd.y2);
+        ctx.strokeStyle = cmd.color;
+        ctx.lineWidth = cmd.width || 2;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+      } else if (cmd.type === 'arc') {
+        ctx.beginPath();
+        ctx.arc(cmd.x, cmd.y, cmd.r, cmd.a1, cmd.a2);
+        ctx.strokeStyle = cmd.color;
+        ctx.lineWidth = cmd.width || 2;
+        ctx.stroke();
+      }
+    }
+    if (i < commands.length) {
+      animFrame = requestAnimationFrame(step);
+    } else {
+      if (onDone) onDone();
+    }
+  }
+  animFrame = requestAnimationFrame(step);
+}
+ 
+// ============================
+// FUNGSI GAMBAR BUNGA
+// ============================
+function drawDaisy() {
+  document.getElementById('flowerStatus').textContent = '🌼 Menggambar Daisy...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value);
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  const steps = 900;
+  const k = petals % 2 === 0 ? petals / 2 : petals;
+  for (let i = 0; i < steps - 1; i++) {
+    const theta1 = (i / steps) * Math.PI * 2 * Math.ceil(petals / 2);
+    const theta2 = ((i + 1) / steps) * Math.PI * 2 * Math.ceil(petals / 2);
+    const r1 = Math.cos(k * theta1) * size;
+    const r2 = Math.cos(k * theta2) * size;
+    cmds.push({ type: 'line', x1: cx + r1 * Math.cos(theta1), y1: cy + r1 * Math.sin(theta1), x2: cx + r2 * Math.cos(theta2), y2: cy + r2 * Math.sin(theta2), color: getRainbowColor(i, steps, mode), width: 2 });
+  }
+  cmds.push({ type: 'line', x1: cx, y1: cy + 30, x2: cx, y2: cy + 210, color: '#22c55e', width: 4 });
+  cmds.push({ type: 'line', x1: cx, y1: cy + 130, x2: cx - 45, y2: cy + 110, color: '#22c55e', width: 3 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '🌼 Daisy selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function drawSunflower() {
+  document.getElementById('flowerStatus').textContent = '🌻 Menggambar Bunga Matahari...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value) * 0.8;
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  const phi = (1 + Math.sqrt(5)) / 2;
+  const n = 320;
+  for (let i = 0; i < n; i++) {
+    const r = size * 0.6 * Math.sqrt(i / n);
+    const theta = 2 * Math.PI * i / (phi * phi);
+    const x = cx + r * Math.cos(theta);
+    const y = cy + r * Math.sin(theta);
+    cmds.push({ type: 'arc', x, y, r: 3 + r / size * 4, a1: 0, a2: Math.PI * 2, color: getRainbowColor(i, n, mode), width: 1.5 });
+  }
+  for (let p = 0; p < petals; p++) {
+    const angle = (p / petals) * Math.PI * 2;
+    const dist = size * 0.65, pe = size * 0.3;
+    for (let j = 0; j < 30; j++) {
+      const t = j / 30, ra = angle + (t - 0.5) * 0.8, rr = pe * Math.sin(t * Math.PI);
+      const x1 = cx + (dist - pe/2) * Math.cos(angle) + rr * Math.cos(ra + Math.PI/2);
+      const y1 = cy + (dist - pe/2) * Math.sin(angle) + rr * Math.sin(ra + Math.PI/2);
+      const x2 = cx + (dist + pe/2) * Math.cos(angle) + rr * Math.cos(ra + Math.PI/2);
+      const y2 = cy + (dist + pe/2) * Math.sin(angle) + rr * Math.sin(ra + Math.PI/2);
+      cmds.push({ type: 'line', x1, y1, x2, y2, color: mode === 'rainbow' ? `hsl(${p*30},90%,65%)` : getRainbowColor(p, petals, mode), width: 2 });
+    }
+  }
+  cmds.push({ type: 'line', x1: cx, y1: cy + size * 0.7, x2: cx, y2: cy + 220, color: '#16a34a', width: 5 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '🌻 Bunga Matahari selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function drawSpiral() {
+  document.getElementById('flowerStatus').textContent = '🌀 Menggambar Spiral Bunga...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value);
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  for (let p = 0; p < petals; p++) {
+    const baseAngle = (p / petals) * Math.PI * 2;
+    const steps = 120;
+    let x = cx, y = cy, angle = baseAngle;
+    for (let s = 0; s < steps; s++) {
+      const t = s / steps, r = size * t;
+      const nx = cx + r * Math.cos(angle), ny = cy + r * Math.sin(angle);
+      cmds.push({ type: 'line', x1: x, y1: y, x2: nx, y2: ny, color: getRainbowColor(p*steps+s, petals*steps, mode), width: 1.5 + t * 2 });
+      x = nx; y = ny; angle += 0.15;
+    }
+  }
+  cmds.push({ type: 'line', x1: cx, y1: cy + size * 0.7, x2: cx, y2: cy + 220, color: '#16a34a', width: 5 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '🌀 Spiral selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function drawLotus() {
+  document.getElementById('flowerStatus').textContent = '🌸 Menggambar Lotus...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value);
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  for (let layer = 0; layer < 3; layer++) {
+    const layerSize = size * (1 - layer * 0.2);
+    const layerPetals = Math.max(5, petals - layer * 3);
+    for (let p = 0; p < layerPetals; p++) {
+      const angle = (p / layerPetals) * Math.PI * 2 + (layer * Math.PI / layerPetals);
+      const steps = 80;
+      for (let s = 0; s < steps; s++) {
+        const t = s / steps;
+        const petalAngle = angle + (t - 0.5) * (Math.PI / layerPetals) * 1.5;
+        const r1 = layerSize * Math.sin(t * Math.PI) * 0.5;
+        const r2 = layerSize * Math.sin((t + 0.01) * Math.PI) * 0.5;
+        const d1 = layerSize * t, d2 = layerSize * (t + 0.01);
+        cmds.push({ type: 'line', x1: cx+d1*Math.cos(angle)+r1*Math.cos(petalAngle+Math.PI/2), y1: cy+d1*Math.sin(angle)+r1*Math.sin(petalAngle+Math.PI/2), x2: cx+d2*Math.cos(angle)+r2*Math.cos(petalAngle+Math.PI/2), y2: cy+d2*Math.sin(angle)+r2*Math.sin(petalAngle+Math.PI/2), color: getRainbowColor(layer*100+p*10+s, 300, mode), width: 1.5 });
+      }
+    }
+  }
+  cmds.push({ type: 'line', x1: cx, y1: cy + size * 0.7, x2: cx, y2: cy + 220, color: '#16a34a', width: 5 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '🌸 Lotus selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function drawMandala() {
+  document.getElementById('flowerStatus').textContent = '✨ Menggambar Mandala...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value);
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  const layers = 6;
+  for (let layer = 1; layer <= layers; layer++) {
+    const r = (size / layers) * layer, pts = petals * layer;
+    for (let p = 0; p < pts; p++) {
+      const a1 = (p / pts) * Math.PI * 2, a2 = ((p+1)/pts) * Math.PI * 2, am = (a1+a2)/2;
+      const x1=cx+r*Math.cos(a1), y1=cy+r*Math.sin(a1);
+      const x2=cx+r*Math.cos(a2), y2=cy+r*Math.sin(a2);
+      const xm=cx+(r+20)*Math.cos(am), ym=cy+(r+20)*Math.sin(am);
+      const col = getRainbowColor(layer*pts+p, layers*pts, mode);
+      cmds.push({ type:'line', x1:cx, y1:cy, x2:x1, y2:y1, color:col, width:1 });
+      cmds.push({ type:'line', x1, y1, x2:xm, y2:ym, color:col, width:1.5 });
+      cmds.push({ type:'line', x1:xm, y1:ym, x2, y2, color:col, width:1.5 });
+      cmds.push({ type:'arc', x:cx, y:cy, r, a1, a2, color:col, width:1 });
+    }
+  }
+  cmds.push({ type: 'line', x1: cx, y1: cy + size * 0.7, x2: cx, y2: cy + 220, color: '#16a34a', width: 5 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '✨ Mandala selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function drawLily() {
+  document.getElementById('flowerStatus').textContent = '🌷 Menggambar Bunga Lily...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value);
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  for (let p = 0; p < petals; p++) {
+    const angle = (p / petals) * Math.PI * 2;
+    const steps = 90;
+    for (let s = 0; s < steps; s++) {
+      const t = s/steps, nt = (s+1)/steps;
+      const w = size * Math.sin(t * Math.PI) * Math.pow(1-t, 0.6) * 0.45;
+      const nw = size * Math.sin(nt * Math.PI) * Math.pow(1-nt, 0.6) * 0.45;
+      const d = size*t, nd = size*nt;
+      const mx=cx+d*Math.cos(angle), my=cy+d*Math.sin(angle);
+      const nmx=cx+nd*Math.cos(angle), nmy=cy+nd*Math.sin(angle);
+      const color = getRainbowColor(p*steps+s, petals*steps, mode);
+      cmds.push({ type:'line', x1:mx+w*Math.cos(angle-Math.PI/2), y1:my+w*Math.sin(angle-Math.PI/2), x2:nmx+nw*Math.cos(angle-Math.PI/2), y2:nmy+nw*Math.sin(angle-Math.PI/2), color, width:2 });
+      cmds.push({ type:'line', x1:mx+w*Math.cos(angle+Math.PI/2), y1:my+w*Math.sin(angle+Math.PI/2), x2:nmx+nw*Math.cos(angle+Math.PI/2), y2:nmy+nw*Math.sin(angle+Math.PI/2), color, width:2 });
+    }
+  }
+  const stamenCount = Math.min(petals, 6);
+  for (let i = 0; i < stamenCount; i++) {
+    const sa = (i/stamenCount)*Math.PI*2 + Math.PI/petals, sl = size*0.65;
+    const sx=cx+sl*Math.cos(sa), sy=cy+sl*Math.sin(sa);
+    cmds.push({ type:'line', x1:cx, y1:cy, x2:sx, y2:sy, color:'#facc15', width:2 });
+    cmds.push({ type:'arc', x:sx, y:sy, r:4, a1:0, a2:Math.PI*2, color:'#ca8a04', width:3 });
+  }
+  cmds.push({ type: 'line', x1: cx, y1: cy + size * 0.5, x2: cx, y2: cy + 250, color: '#16a34a', width: 5 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '🌷 Lily selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function drawRose() {
+  document.getElementById('flowerStatus').textContent = '🌹 Menggambar Mawar...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value);
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  const totalPetals = petals * 3;
+  const goldenAngle = 137.5 * (Math.PI / 180);
+  for (let p = 1; p <= totalPetals; p++) {
+    const t = p/totalPetals, r = size*Math.pow(t,0.6), angle = p*goldenAngle, span = 1.2+t*1.5;
+    const steps = 40;
+    let prevX = null, prevY = null;
+    for (let s = 0; s <= steps; s++) {
+      const st = s/steps;
+      const currentAngle = angle - span/2 + span*st;
+      const bulge = Math.sin(st*Math.PI)*(size*0.25*t+5);
+      const curl = Math.cos(st*Math.PI*2)*(size*0.05*t);
+      const petalR = r+bulge+curl;
+      const x = cx+petalR*Math.cos(currentAngle), y = cy+petalR*Math.sin(currentAngle);
+      if (prevX !== null) cmds.push({ type:'line', x1:prevX, y1:prevY, x2:x, y2:y, color:getRainbowColor(p, totalPetals, mode), width:1.5+t*2.5 });
+      prevX=x; prevY=y;
+    }
+  }
+  cmds.push({ type:'line', x1:cx, y1:cy+size*0.8, x2:cx, y2:cy+250, color:'#16a34a', width:5 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '🌹 Mawar selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function drawTulip() {
+  document.getElementById('flowerStatus').textContent = '🌷 Menggambar Bunga Tulip...';
+  const petals = parseInt(document.getElementById('petalSlider').value);
+  const size   = parseInt(document.getElementById('sizeSlider').value);
+  const mode   = document.getElementById('colorMode').value;
+  const cx = flowerCanvas.width / 2, cy = flowerCanvas.height / 2;
+  const cmds = [];
+  const petalsPerLayer = Math.max(3, Math.ceil(petals/2));
+  for (let layer = 0; layer < 2; layer++) {
+    const layerSize = layer===1 ? size : size*0.85;
+    const angleOffset = layer===1 ? Math.PI/petalsPerLayer : 0;
+    for (let p = 0; p < petalsPerLayer; p++) {
+      const angle = (p/petalsPerLayer)*Math.PI*2 + angleOffset;
+      const steps = 70;
+      for (let s = 0; s < steps; s++) {
+        const t=s/steps, nt=(s+1)/steps;
+        const w = layerSize*Math.sin(t*Math.PI)*(0.12+0.38*Math.sqrt(t));
+        const nw = layerSize*Math.sin(nt*Math.PI)*(0.12+0.38*Math.sqrt(nt));
+        const d=layerSize*t, nd=layerSize*nt;
+        const mx=cx+d*Math.cos(angle), my=cy+d*Math.sin(angle);
+        const nmx=cx+nd*Math.cos(angle), nmy=cy+nd*Math.sin(angle);
+        const color = getRainbowColor(layer*80+p*steps+s, 2*petalsPerLayer*steps, mode);
+        cmds.push({ type:'line', x1:mx+w*Math.cos(angle-Math.PI/2), y1:my+w*Math.sin(angle-Math.PI/2), x2:nmx+nw*Math.cos(angle-Math.PI/2), y2:nmy+nw*Math.sin(angle-Math.PI/2), color, width:2 });
+        cmds.push({ type:'line', x1:mx+w*Math.cos(angle+Math.PI/2), y1:my+w*Math.sin(angle+Math.PI/2), x2:nmx+nw*Math.cos(angle+Math.PI/2), y2:nmy+nw*Math.sin(angle+Math.PI/2), color, width:2 });
+      }
+    }
+  }
+  for (let i = 0; i < 3; i++) {
+    const sa=(i/3)*Math.PI*2, sl=size*0.15;
+    const sx=cx+sl*Math.cos(sa), sy=cy+sl*Math.sin(sa);
+    cmds.push({ type:'line', x1:cx, y1:cy, x2:sx, y2:sy, color:'#fbbf24', width:2.5 });
+    cmds.push({ type:'arc', x:sx, y:sy, r:3.5, a1:0, a2:Math.PI*2, color:'#d97706', width:2 });
+  }
+  cmds.push({ type:'line', x1:cx, y1:cy+size*0.5, x2:cx, y2:cy+240, color:'#16a34a', width:5 });
+  turtleDraw(cmds, () => { document.getElementById('flowerStatus').textContent = '🌷 Tulip selesai! Aktifkan ✏️ Mode Gambar untuk melukis di atasnya~'; });
+}
+ 
+function downloadFlower() {
+  const link = document.createElement('a');
+  link.download = 'bunga-rania.png';
+  link.href = flowerCanvas.toDataURL();
+  link.click();
+}
+</script>
+</body>
+</html>
